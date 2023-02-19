@@ -63,19 +63,19 @@ public class GoldMedalController {
         List<GoldMedal> medalsList;
         switch (sortBy) {
             case "year":
-                medalsList = goldMedalRepository.orderByYear(countryName);
+                medalsList = this.goldMedalRepository.orderByYear(countryName);
                 break;
             case "season":
-                medalsList = goldMedalRepository.orderBySeason(countryName);
+                medalsList = this.goldMedalRepository.orderBySeason(countryName);
                 break;
             case "city":
-                medalsList = goldMedalRepository.orderByCity(countryName);
+                medalsList = this.goldMedalRepository.orderByCity(countryName);
                 break;
             case "name":
-                medalsList = goldMedalRepository.orderByName(countryName);
+                medalsList = this.goldMedalRepository.orderBySport(countryName);
                 break;
             case "event":
-                medalsList = goldMedalRepository.orderByEvent(countryName);
+                medalsList = this.goldMedalRepository.orderByEvent(countryName);
                 break;
             default:
                 medalsList = new ArrayList<>();
@@ -141,25 +141,31 @@ public class GoldMedalController {
         switch (sortBy) {
             case "name":
                 if (ascendingOrder) {
-                    countries = this.goldMedalRepository.findAllCountriesAndOrderByNameAsc();
+//                    countries = this.goldMedalRepository.findAllCountriesAndOrderByNameAsc();
+                    countries = this.goldMedalRepository.findAllAndOrderByName();
                 } else {
-                    countries = this.goldMedalRepository.findAllCountriesAndOrderByNameDesc();
+//                    countries = this.goldMedalRepository.findAllCountriesAndOrderByNameDesc();
+                    countries = this.goldMedalRepository.findAllAndOrderByNameDesc();
                 }
                 // TODO: list of countries sorted by name in the given order
                 break;
             case "gdp":
                 if (ascendingOrder){
-                    countries = this.goldMedalRepository.findAllCountriesAndOrderByGdpAsc();
+//                    countries = this.goldMedalRepository.findAllCountriesAndOrderByGdpAsc();
+                    countries = this.goldMedalRepository.findAllAndOrderByGdp();
                 } else {
-                    countries = this.goldMedalRepository.findAllCountriesAndOrderByGdpDesc();
+//                    countries = this.goldMedalRepository.findAllCountriesAndOrderByGdpDesc();
+                    countries = this.goldMedalRepository.findAllAndOrderByGdpDesc();
                 }
             // TODO: list of countries sorted by gdp in the given order
                 break;
             case "population":
                 if (ascendingOrder){
-                    countries = this.goldMedalRepository.findAllCountriesAndOrderByPopulationAsc();
+//                    countries = this.goldMedalRepository.findAllCountriesAndOrderByPopulationAsc();
+                    countries = this.goldMedalRepository.findAllAndOrderByPopulation();
                 } else {
-                    countries = this.goldMedalRepository.findAllCountriesAndOrderByPopulationDesc();
+//                    countries = this.goldMedalRepository.findAllCountriesAndOrderByPopulationDesc();
+                    countries = this.goldMedalRepository.findAllAndOrderByPopulationDesc();
                 }
 
             // TODO: list of countries sorted by population in the given order
@@ -167,7 +173,8 @@ public class GoldMedalController {
             case "medals":
             default:
  //               if (ascendingOrder){
-                    countries = this.goldMedalRepository.findAllCountriesAndOrderByPopulationAsc();
+//                    countries = this.goldMedalRepository.findAllCountriesAndOrderByPopulationAsc();
+                countries = this.goldMedalRepository.findAllAndOrderByPopulation();
  //               } else {
 
 
