@@ -1,6 +1,7 @@
 package com.codecademy.goldmedal.controllers;
 
 import com.codecademy.goldmedal.model.*;
+import com.codecademy.goldmedal.repositories.CountryRepository;
 import com.codecademy.goldmedal.repositories.GoldMedalRepository;
 import org.apache.commons.text.WordUtils;
 import org.springframework.web.bind.annotation.*;
@@ -27,14 +28,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/countries")
 public class GoldMedalController {
     private final GoldMedalRepository goldMedalRepository;
+    private final CountryRepository countryRepository;
 
-    public GoldMedalController(final GoldMedalRepository goldMedalRepository) {
-        this.goldMedalRepository= goldMedalRepository;
+    public GoldMedalController(final GoldMedalRepository goldMedalRepository, final CountryRepository countryRepository) {
+        this.goldMedalRepository = goldMedalRepository;
+        this.countryRepository = countryRepository;
     }
 
     @GetMapping("/all")
-    public Iterable<GoldMedal> getAllCountries() {
-        return this.goldMedalRepository.findAll();
+    public Iterable<Country> getAllCountries() {
+        return this.countryRepository.findAll();
     }
 
 
@@ -86,7 +89,7 @@ public class GoldMedalController {
     }
 
     private CountryDetailsResponse getCountryDetailsResponse(String countryName) {
-        Optional<Country> countryOptional = this.goldMedalRepository.findByCountryName(countryName);
+        Optional<Country> countryOptional = this.countryRepository.findByCountryName(countryName);
         // TODO: get the country; this repository method should return a java.util.Optional
         if (countryOptional.isEmpty()) {
 
@@ -142,30 +145,30 @@ public class GoldMedalController {
             case "name":
                 if (ascendingOrder) {
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByNameAsc();
-                    countries = this.goldMedalRepository.findAllAndOrderByName();
+                    countries = this.countryRepository.findAllAndOrderByNameAsc();
                 } else {
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByNameDesc();
-                    countries = this.goldMedalRepository.findAllAndOrderByNameDesc();
+                    countries = this.countryRepository.findAllAndOrderByNameDesc();
                 }
                 // TODO: list of countries sorted by name in the given order
                 break;
             case "gdp":
                 if (ascendingOrder){
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByGdpAsc();
-                    countries = this.goldMedalRepository.findAllAndOrderByGdp();
+                    countries = this.countryRepository.findAllAndOrderByGdpAsc();
                 } else {
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByGdpDesc();
-                    countries = this.goldMedalRepository.findAllAndOrderByGdpDesc();
+                    countries = this.countryRepository.findAllAndOrderByGdpDesc();
                 }
             // TODO: list of countries sorted by gdp in the given order
                 break;
             case "population":
                 if (ascendingOrder){
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByPopulationAsc();
-                    countries = this.goldMedalRepository.findAllAndOrderByPopulation();
+                    countries = this.countryRepository.findAllAndOrderByPopulationAsc();
                 } else {
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByPopulationDesc();
-                    countries = this.goldMedalRepository.findAllAndOrderByPopulationDesc();
+                    countries = this.countryRepository.findAllAndOrderByPopulationDesc();
                 }
 
             // TODO: list of countries sorted by population in the given order
@@ -174,7 +177,7 @@ public class GoldMedalController {
             default:
  //               if (ascendingOrder){
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByPopulationAsc();
-                countries = this.goldMedalRepository.findAllAndOrderByPopulation();
+                countries = this.countryRepository.findAllAndOrderByPopulationAsc();
  //               } else {
 
 

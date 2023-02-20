@@ -1,6 +1,7 @@
 com\codecademy\goldmedal\model\CountryMedalsListResponse.class
 com\codecademy\goldmedal\model\Country.class
 com\codecademy\goldmedal\model\CountrySummary.class
+com\codecademy\goldmedal\repositories\CountryRepository.class
 com\codecademy\goldmedal\model\CountriesResponse.class
 com\codecademy\goldmedal\repositories\GoldMedalRepository.class
 com\codecademy\goldmedal\GoldMedalApplication.class
