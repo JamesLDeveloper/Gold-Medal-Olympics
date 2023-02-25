@@ -11,23 +11,23 @@ import com.codecademy.goldmedal.model.Country;
 
 public interface CountryRepository extends  CrudRepository<Country, Long> {
 
-    Optional<Country> findByCountryName(String countryName);
+    Optional<Country> getByName(String countryName);
 
 //    List<Country> findAllCountries();
 
     //    List<Country> findAllCountriesAndOrderByNameAsc();
-    List<Country> findAllAndOrderByNameAsc();
+    List<Country> getAllByOrderByNameAsc();
     //    List<Country> findAllCountriesAndOrderByNameDesc();
-    List<Country> findAllAndOrderByNameDesc();
+    List<Country> getAllByOrderByNameDesc();
 
     //    List<Country> findAllCountriesAndOrderByGdpAsc();
-    List<Country> findAllAndOrderByGdpAsc();
+    List<Country> getAllByOrderByGdpAsc();
     //    List<Country> findAllCountriesAndOrderByGdpDesc();
-    List<Country> findAllAndOrderByGdpDesc();
+    List<Country> getAllByOrderByGdpDesc();
     //    List<Country> findAllCountriesAndOrderByPopulationAsc();
-    List<Country> findAllAndOrderByPopulationAsc();
+    List<Country> getAllByOrderByPopulationAsc();
     //    List<Country> findAllCountriesAndOrderByPopulationDesc();
-    List<Country> findAllAndOrderByPopulationDesc();
+    List<Country> getAllByOrderByPopulationDesc();
 //    List<GoldMedal> findByCountry(Country country);
 
 

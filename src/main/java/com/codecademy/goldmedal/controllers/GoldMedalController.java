@@ -89,7 +89,7 @@ public class GoldMedalController {
     }
 
     private CountryDetailsResponse getCountryDetailsResponse(String countryName) {
-        Optional<Country> countryOptional = this.countryRepository.findByCountryName(countryName);
+        Optional<Country> countryOptional = this.countryRepository.getByName(countryName);
         // TODO: get the country; this repository method should return a java.util.Optional
         if (countryOptional.isEmpty()) {
 
@@ -145,30 +145,30 @@ public class GoldMedalController {
             case "name":
                 if (ascendingOrder) {
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByNameAsc();
-                    countries = this.countryRepository.findAllAndOrderByNameAsc();
+                    countries = this.countryRepository.getAllByOrderByNameAsc();
                 } else {
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByNameDesc();
-                    countries = this.countryRepository.findAllAndOrderByNameDesc();
+                    countries = this.countryRepository.getAllByOrderByNameDesc();
                 }
                 // TODO: list of countries sorted by name in the given order
                 break;
             case "gdp":
                 if (ascendingOrder){
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByGdpAsc();
-                    countries = this.countryRepository.findAllAndOrderByGdpAsc();
+                    countries = this.countryRepository.getAllByOrderByGdpAsc();
                 } else {
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByGdpDesc();
-                    countries = this.countryRepository.findAllAndOrderByGdpDesc();
+                    countries = this.countryRepository.getAllByOrderByGdpDesc();
                 }
             // TODO: list of countries sorted by gdp in the given order
                 break;
             case "population":
                 if (ascendingOrder){
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByPopulationAsc();
-                    countries = this.countryRepository.findAllAndOrderByPopulationAsc();
+                    countries = this.countryRepository.getAllByOrderByPopulationAsc();
                 } else {
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByPopulationDesc();
-                    countries = this.countryRepository.findAllAndOrderByPopulationDesc();
+                    countries = this.countryRepository.getAllByOrderByPopulationDesc();
                 }
 
             // TODO: list of countries sorted by population in the given order
@@ -177,7 +177,7 @@ public class GoldMedalController {
             default:
  //               if (ascendingOrder){
 //                    countries = this.goldMedalRepository.findAllCountriesAndOrderByPopulationAsc();
-                countries = this.countryRepository.findAllAndOrderByPopulationAsc();
+                countries = this.countryRepository.getAllByOrderByPopulationAsc();
  //               } else {
 
 
