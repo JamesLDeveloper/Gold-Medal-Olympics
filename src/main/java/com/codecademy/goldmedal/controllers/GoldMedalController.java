@@ -66,19 +66,19 @@ public class GoldMedalController {
         List<GoldMedal> medalsList;
         switch (sortBy) {
             case "year":
-                medalsList = this.goldMedalRepository.orderByYear(countryName);
+                medalsList = this.goldMedalRepository.getByCountryOrderByYearAsc(countryName);
                 break;
             case "season":
-                medalsList = this.goldMedalRepository.orderBySeason(countryName);
+                medalsList = this.goldMedalRepository.getByCountryOrderBySeasonAsc(countryName);
                 break;
             case "city":
-                medalsList = this.goldMedalRepository.orderByCity(countryName);
+                medalsList = this.goldMedalRepository.getByCountryOrderByCityAsc(countryName);
                 break;
             case "name":
-                medalsList = this.goldMedalRepository.orderBySport(countryName);
+                medalsList = this.goldMedalRepository.getByCountryOrderByNameAsc(countryName);
                 break;
             case "event":
-                medalsList = this.goldMedalRepository.orderByEvent(countryName);
+                medalsList = this.goldMedalRepository.getByCountryOrderByEventAsc(countryName);
                 break;
             default:
                 medalsList = new ArrayList<>();
@@ -97,31 +97,31 @@ public class GoldMedalController {
         }
 
         var country = countryOptional.get();
-        var goldMedalCount = this.goldMedalRepository.findByCountry(country).size();
+        var goldMedalCount = this.goldMedalRepository.countByCountry(countryName);
 
                 // TODO: get the medal count
 
-        var summerWins = this.goldMedalRepository.findByCountryAndBySeasonOrderByYear(country, "Summer");
+        var summerWins = this.goldMedalRepository.getByCountryAndSeasonOrderByYearAsc(countryName, "Summer");
 
                 // TODO: get the collection of wins at the Summer Olympics, sorted by year in ascending order
         var numberSummerWins = summerWins.size() > 0 ? summerWins.size() : null;
-        var totalSummerEvents = this.goldMedalRepository.findBySeason("Summer").size();
+        var totalSummerEvents = this.goldMedalRepository.countBySeason("Summer");
 
                 // TODO: get the total number of events at the Summer Olympics
         var percentageTotalSummerWins = totalSummerEvents != 0 && numberSummerWins != null ? (float) summerWins.size() / totalSummerEvents : null;
         var yearFirstSummerWin = summerWins.size() > 0 ? summerWins.get(0).getYear() : null;
 
-        var winterWins = this.goldMedalRepository.findByCountryAndBySeasonOrderByYear(country, "Winter");
+        var winterWins = this.goldMedalRepository.getByCountryAndSeasonOrderByYearAsc(countryName, "Winter");
                 // TODO: get the collection of wins at the Winter Olympics
         var numberWinterWins = winterWins.size() > 0 ? winterWins.size() : null;
-        var totalWinterEvents = this.goldMedalRepository.findBySeason("Winter").size();
+        var totalWinterEvents = this.goldMedalRepository.countBySeason("Winter");
                 // TODO: get the total number of events at the Winter Olympics, sorted by year in ascending order
         var percentageTotalWinterWins = totalWinterEvents != 0 && numberWinterWins != null ? (float) winterWins.size() / totalWinterEvents : null;
         var yearFirstWinterWin = winterWins.size() > 0 ? winterWins.get(0).getYear() : null;
 
-        var numberEventsWonByFemaleAthletes = this.goldMedalRepository.findByCountryAndByGender(country, "Women").size();
+        var numberEventsWonByFemaleAthletes = this.goldMedalRepository.countByCountryAndGender(countryName, "Women");
                 // TODO: get the number of wins by female athletes
-        var numberEventsWonByMaleAthletes =  this.goldMedalRepository.findByCountryAndByGender(country, "Men").size();
+        var numberEventsWonByMaleAthletes =  this.goldMedalRepository.countByCountryAndGender(countryName, "Men");
     // TODO: get the number of wins by male athletes
 
         return new CountryDetailsResponse(
